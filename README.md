@@ -1,2 +1,2 @@
 # quran-uthmani-text-api
-An api for getting uthmani quran (v1) texts, as seen on quran.com .
+An api for getting uthmani quran (v1) texts, as seen on https://www.quran.com .
