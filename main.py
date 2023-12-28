@@ -1,12 +1,12 @@
-from modules import surah_aya, ReversibleString
+from modules import surah_aya
 from flask import Flask, jsonify
 
 
 app = Flask(__name__)
 
-str = ReversibleString
-@app.route('/<int:surah>,<int:ayah>', methods=['GET'])
-def get_ayah(surah: int, ayah: int):
+
+@app.route('/<string:surah>,<string:ayah>', methods=['GET'])
+def get_ayah(surah: str, ayah: str):
     ayah_data = surah_aya[f'{surah}:{ayah}']
     text = ayah_data[0]
     font = ayah_data[1]
@@ -15,13 +15,13 @@ def get_ayah(surah: int, ayah: int):
     return result
 
 
-@app.route('/<int:surah>,<string:ayah_range>', methods=['GET'])
-def get_ayahs_range(surah: int, ayah_range: str):
+@app.route('/<string:surah>,<string:ayah_range>', methods=['GET'])
+def get_ayahs_range(surah: str, ayah_range: str):
     ayah_texts = []
     fonts_list = []
 
-    index = str(surah) + ':' + ayah_range
-    index_split = index.split(':')
+    index = str(surah) + ',' + ayah_range
+    index_split = index.split(',')
     
     for i in range(int(index_split[1].split('-')[0]), int(index_split[1].split('-')[1])+1):
         ayah_data = surah_aya[f'{index_split[0]}:{i}']
