@@ -1,1 +1,1 @@
-from data.aya_dict import surah_aya
+from modules.aya_dict import surah_aya
