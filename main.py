@@ -1,22 +1,24 @@
 from modules import surah_aya
-from flask import Flask, jsonify
+from flask import Flask
 
 
 app = Flask(__name__)
 
 
-@app.route('/<string:surah>,<string:ayah>', methods=['GET'])
-def get_ayah(surah: str, ayah: str):
+@app.route('/<int:surah>,<int:ayah>', methods=['GET'])
+def get_ayah(surah: int, ayah: int):
     ayah_data = surah_aya[f'{surah}:{ayah}']
     text = ayah_data[0]
     font = ayah_data[1]
-    result = jsonify({'text': text,
-              'font': font})
+    result = {
+        'text': text,
+        'font': font
+    }
     return result
 
 
-@app.route('/<string:surah>,<string:ayah_range>', methods=['GET'])
-def get_ayahs_range(surah: str, ayah_range: str):
+@app.route('/<int:surah>,<string:ayah_range>', methods=['GET'])
+def get_ayahs_range(surah: int, ayah_range: str):
     ayah_texts = []
     fonts_list = []
 
@@ -33,10 +35,10 @@ def get_ayahs_range(surah: str, ayah_range: str):
     # remove duplicate values
     fonts_list = sorted(set(fonts_list))
 
-    result = jsonify({
+    result = {
         'text': ''.join(ayah_texts),
         'fonts': fonts_list
-    })
+    }
     return result
 
 
