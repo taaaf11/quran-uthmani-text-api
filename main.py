@@ -40,7 +40,3 @@ def get_ayahs_range(surah: int, ayah_range: str):
         'fonts': fonts_list
     }
     return result
-
-
-if __name__ == '__main__':
-    app.run()
